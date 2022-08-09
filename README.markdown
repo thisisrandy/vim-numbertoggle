@@ -1,3 +1,25 @@
+# Why the fork?
+
+This is a version of numbertoggle that does not trigger on
+`FocusGained`/`FocusLost` events. The reason for this is specific to
+`gnome-terminal`. When the setting `org.gnome.desktop.interface locate-pointer`
+(*Pointer Location* in the Keyboard & Mouse section of GNOME Tweaks) is set to
+`true`, pressing `Ctrl` causes the terminal (though not the terminal window) to
+lose focus, which means that numbertoggle is triggered.
+
+ This is merely annoying if one uses `Ctrl` chords frequently, but it's
+ actively harmful if one wants to make a binding like the following (as
+ suggested in the help file) to manually control relative line number display:
+
+```
+    :nnoremap <silent> <C-n> :set relativenumber!<cr>
+```
+
+Because numbertoggle triggers on `FocusLost` and `FocusGained`, one would
+actually have to input `<C-n-n>` (hold `Ctrl` and press `n` twice) in order to
+return to relative line mode after having turned it off. This fork allows
+numbertoggle and the `locate-pointer` setting to work in relative harmony.
+
 # numbertoggle
 
 
